@@ -6,10 +6,18 @@
 
 <script>
 import $ from 'jquery'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'DashboardAdmin',
   components: {},
+  computed: {
+    ...mapGetters([
+      'sidebar',
+      'avatar',
+      'device'
+    ])
+  },
   data() {
     return {
       reader_path: process.env.VUE_APP_BASE_API + 'statics/paper_viewer/index.html?file=',
@@ -37,6 +45,13 @@ export default {
         }
       })
     })
+    if(this.sidebar.opened){this.toggleSideBar()}
+
+  },
+  methods: {
+    toggleSideBar() {
+      this.$store.dispatch('app/toggleSideBar')
+    }
   }
 }
 </script>
@@ -49,9 +64,11 @@ body,
   margin: 0;
   padding: 0;
 }
+
 .app-wrapper {
-    overflow-y:hidden;
+  overflow-y: hidden;
 }
+
 .el-row {
   margin-bottom: 20px;
   height: 100%;
@@ -65,9 +82,11 @@ body,
   border-radius: 4px;
   height: 100%;
 }
+
 .is-fullscreen {
   overflow: hidden;
 }
+
 .paper_reader_content {
   position: absolute;
   background: #1f2d3d;
@@ -77,6 +96,7 @@ body,
   width: 100%;
   z-index: 999;
 }
+
 iframe {
   width: 100%;
   height: 100%;

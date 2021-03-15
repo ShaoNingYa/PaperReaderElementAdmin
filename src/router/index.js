@@ -105,6 +105,13 @@ export const constantRoutes = [
     children: [
       {
         path: '',
+        // path: 'todo_list',
+        name: 'ToDo List',
+        component: () => import('@/views/study_manage/todo_list/index'),
+        meta: { title: '今日待办', icon: 'el-icon-finished' }
+      },
+      {
+        path: 'study_history',
         name: 'History',
         component: () => import('@/views/study_manage/history/index'),
         meta: { title: '学习历史', icon: 'el-icon-data-line' }
@@ -248,8 +255,8 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: '官方文档', icon: 'link' }
+        path: 'https://github.com/',
+        meta: { title: 'GitHub', icon: 'link' }
       }
     ]
   },

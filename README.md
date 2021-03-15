@@ -82,7 +82,7 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/PanJiaChen/vue-element-admin.git
+git clone https://github.com/ShaoNingYa/PaperReaderElementAdmin.git
 
 # 进入项目目录
 cd vue-element-admin
@@ -128,3 +128,16 @@ npm run lint -- --fix
 ## Online Demo
 
 [在线 Demo](http://1.15.130.237/)
+
+# 功能：
+- 增加在线word、ppt、excel预览功能
+```html
+<iframe 
+    v-else
+    :src="'https://view.officeapps.live.com/op/view.aspx?src='+file" 
+    width='100%' 
+    height='100%' 
+    frameborder='1'>
+</iframe>
+```
+https://github.com/kekingcn/kkFileView
