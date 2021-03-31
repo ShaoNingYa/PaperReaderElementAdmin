@@ -1,47 +1,57 @@
 <template>
   <div class="dashboard-editor-container todo_list">
-    <el-collapse v-model="activeName" accordion>
-      <el-collapse-item title="2020年3月12日" name="1" class="title_content collapse-content">
-        <todo-list :is_edit="true" :todos="defaultList" />
-      </el-collapse-item>
-      <el-collapse-item title="2020年3月11日" name="2" class="title_content">
-        <todo-list :todos="defaultList" />
-      </el-collapse-item>
-      <el-collapse-item title="2020年3月10日" name="3" class="title_content">
-        <todo-list :todos="defaultList" />
-      </el-collapse-item>
-      <el-collapse-item title="2020年3月9日" name="4" class="title_content">
-        <todo-list :todos="defaultList" />
-      </el-collapse-item>
-    </el-collapse>
+    <TimeClock />
+    <todo-list :is_edit="true" :todos="defaultList" @dataChange="dataChange" />
   </div>
 </template>
 
 <script>
 import TodoList from './components/TodoList'
+// import TimeClock from './components/TimeClock'
+import { todolist_get_today, todolist_update_today } from '@/api/study_manage'
+import TimeClock from '@/views/study_manage/todo_list/components/TimeClock'
 
 export default {
   name: 'DashboardAdmin',
   components: {
+    TimeClock,
     TodoList
   },
   data() {
     return {
       defaultList: [
-        { text: 'aaaaaa帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。', done: false },
-        { text: 'fork this repository', done: false },
-        { text: 'follow author', done: false },
-        { text: 'vue-element-admin', done: true },
-        { text: 'vue', done: true },
-        { text: 'element-ui', done: true },
-        { text: 'axios', done: true },
-        { text: 'webpack', done: true }
+        { text: 'loading...', done: false },
+        { text: 'loading...', done: false },
+        { text: 'loading...', done: false },
+        { text: 'loading...', done: false },
+        { text: 'loading...', done: false },
+        { text: 'loading...', done: false }
       ],
-      activeName: '1'
+      activeName: '1',
+      dataChangeFlag: true
     }
   },
+  watch: {},
+  mounted() {
+    this.get_todo_list_today()
+  },
   methods: {
-
+    get_todo_list_today() {
+      todolist_get_today({ token: this.$store.getters.token }).then(response => {
+        // console.log(response.date, response.data)
+        this.defaultList = response.data
+        this.dataChangeFlag = true
+      })
+    },
+    update_todo_list_today() {
+      todolist_update_today({ token: this.$store.getters.token, data: this.defaultList }).then(response => {
+        console.log('数据更新成功，接下来进行刷新')
+        this.get_todo_list_today()
+      })
+    },
+    dataChange() {
+      this.update_todo_list_today()
+    }
   }
 }
 </script>

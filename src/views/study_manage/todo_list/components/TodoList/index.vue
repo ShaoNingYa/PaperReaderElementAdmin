@@ -6,14 +6,14 @@
     <!--    </header>-->
     <!-- main section -->
     <section v-show="todos.length" class="main">
-      <input
+ <!--      <input
         id="toggle-all"
         :checked="allChecked"
         class="toggle-all"
         type="checkbox"
         @change="toggleAll({ done: !allChecked })"
-      >
-      <label for="toggle-all" />
+      > -->
+      <!-- <label for="toggle-all" /> -->
       <ul class="todo-list">
         <todo
           v-for="(todo, index) in filteredTodos"
@@ -103,18 +103,22 @@ export default {
         this.setLocalStorage()
       }
       e.target.value = ''
+      this.$emit('dataChange')
     },
     toggleTodo(val) {
       val.done = !val.done
       this.setLocalStorage()
+      this.$emit('dataChange')
     },
     deleteTodo(todo) {
       this.todos.splice(this.todos.indexOf(todo), 1)
       this.setLocalStorage()
+      this.$emit('dataChange')
     },
     editTodo({ todo, value }) {
       todo.text = value
       this.setLocalStorage()
+      this.$emit('dataChange')
     },
     clearCompleted() {
       this.todos = this.todos.filter(todo => !todo.done)
