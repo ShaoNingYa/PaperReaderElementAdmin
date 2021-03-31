@@ -38,11 +38,12 @@ export default {
 <style scoped>
 #clock {
   font-family: 'Share Tech Mono', monospace;
-  background: #686868;
+  /*background: #686868;*/
+  background: radial-gradient(black, transparent);
   color: #daf6ff;
   text-align: center;
   text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0.1);
-  border: 0.5vw solid rgba(255, 255, 255, 0.8);
+  /*border: 0.5vw solid rgba(255, 255, 255, 0.3);*/
 }
 
 #clock .time {
