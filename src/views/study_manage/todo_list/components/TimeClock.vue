@@ -1,6 +1,6 @@
 <template>
   <div id="clock">
-    <span class="time">{{ date }} {{ time }}</span>
+    <span class="time">{{ clock_date }} {{ clock_time }}</span>
   </div>
 </template>
 
@@ -9,8 +9,8 @@ export default {
   name: 'TimeClock',
   data: function() {
     return {
-      time: '',
-      date: ''
+      clock_date: '现在时间',
+      clock_time: '是什么呢'
     }
   },
   mounted() {
@@ -21,8 +21,8 @@ export default {
       const cd = new Date()
       // const week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
       const week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
-      this.time = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2)
-      this.date = this.zeroPadding(cd.getFullYear(), 4) + '-' + this.zeroPadding(cd.getMonth() + 1, 2) + '-' + this.zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()]
+      this.clock_time = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2)
+      this.clock_date = this.zeroPadding(cd.getFullYear(), 4) + '-' + this.zeroPadding(cd.getMonth() + 1, 2) + '-' + this.zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()]
     },
     zeroPadding(num, digit) {
       let zero = ''
