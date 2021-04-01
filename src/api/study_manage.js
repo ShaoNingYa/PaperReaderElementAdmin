@@ -43,3 +43,24 @@ export function todolist_update_today(data) {
     data
   })
 }
+
+export function todolist_get_history(data) {
+  return request({
+    url: '/study/todolist_get_history',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    transformRequest: [
+      function(data) {
+        var ret = ''
+        for (var it in data) {
+          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+        }
+        ret = ret.substring(0, ret.lastIndexOf('&'))
+        return ret
+      }
+    ],
+    data
+  })
+}

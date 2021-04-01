@@ -2,6 +2,7 @@
   <div>
     <TimeClock />
     <todo-list :is_edit="true" :todos="defaultList" @dataChange="dataChange" />
+    <todo-history style="margin-top: 50px; width: 95%" @dataChange="dataChangeFrom" />
   </div>
 </template>
 
@@ -9,10 +10,12 @@
 import TodoList from './components/TodoList'
 import { todolist_get_today, todolist_update_today } from '@/api/study_manage'
 import TimeClock from '@/views/study_manage/todo_list/components/TimeClock'
+import TodoHistory from '@/views/study_manage/todo_list/components/todoHistory'
 
 export default {
   name: 'DashboardAdmin',
   components: {
+    TodoHistory,
     TimeClock,
     TodoList
   },
@@ -41,6 +44,10 @@ export default {
       })
     },
     dataChange() {
+      this.update_todo_list_today()
+    },
+    dataChangeFrom(data) {
+      this.defaultList = data
       this.update_todo_list_today()
     }
   }
