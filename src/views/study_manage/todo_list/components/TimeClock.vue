@@ -21,7 +21,8 @@ export default {
     updateTime() {
       const cd = new Date()
       // const week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-      const week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+      // const week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+      const week = ['今天周日', '今天周一', '今天周二', '今天周三', '今天周四', '今天周五', '今天周六']
       this.clock_time = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2)
       this.clock_date = this.zeroPadding(cd.getFullYear(), 4) + '-' + this.zeroPadding(cd.getMonth() + 1, 2) + '-' + this.zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()]
     },
@@ -38,6 +39,7 @@ export default {
 
 <style scoped>
 #clock {
+  z-index: 1000;
   font-family: 'Share Tech Mono', monospace;
   /*font-family: 'Special Elite', monospace;*/
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);

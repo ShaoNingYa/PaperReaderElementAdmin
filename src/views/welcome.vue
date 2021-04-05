@@ -34,9 +34,9 @@
     <svg>
       <filter id="wavy">
         <feTurbulence x="0" y="0" baseFrequency="0.02" numOctaves="5" seed="2">
-          <animate attributeName="baseFrequency" dur="60s" values="0.02;0.05;0.02" repeatCount="indefinite" />
+          <animate attributeName="baseFrequency" dur="60s" values="0.02;0.05;0.02" repeatCount="indefinite"/>
         </feTurbulence>
-        <feDisplacementMap in="SourceGraphic" scale="30" />
+        <feDisplacementMap in="SourceGraphic" scale="30"/>
       </filter>
     </svg>
   </div>
@@ -69,7 +69,7 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 300%;
   z-index: -1;
   opacity: 0.8;
   object-fit: cover;
@@ -91,7 +91,7 @@ h1 {
 }
 
 .text_show {
-  font-size: 200px;
+  font-size: 10vw;
   font-weight: bolder;
   color: #808080;
   text-shadow: 0 0 10px #fff;
@@ -115,6 +115,7 @@ h1 {
 .container {
   margin-top: 50px;
   position: relative;
+  font-size: 10vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,9 +123,9 @@ h1 {
 
 .container .box {
   position: relative;
-  width: 800px;
-  height: 200px;
   color: #5e5e5e;
+  width: 80vw;
+  height: 20vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,7 +173,7 @@ h1 {
   position: absolute;
   padding: 20px;
   font-weight: bolder;
-  font-size: 120px;
+  //font-size: 120px;
   letter-spacing: 25px;
   text-align: center;
   text-shadow: 0 0 10px #fff;

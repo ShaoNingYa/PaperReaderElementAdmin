@@ -6,6 +6,7 @@
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
+<!--        <button v-model="paperOpenType">{{ isRightPanelShow }}</button>-->
         <search id="header-search" class="right-menu-item" />
 
         <error-log class="errLog-container right-menu-item hover-effect" />
@@ -46,14 +47,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import ErrorLog from '@/components/ErrorLog'
 import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import Search from '@/components/HeaderSearch'
-
+import RightPanel from '@/components/RightPanel'
+import Settings from './Settings'
 export default {
   components: {
     Breadcrumb,
@@ -68,7 +70,18 @@ export default {
       'sidebar',
       'avatar',
       'device'
-    ])
+    ]),
+    rightPanelOpenType: {
+      get() {
+        return this.$store.state.settings.isRightPanelShow
+      },
+      set(val) {
+        this.$store.dispatch('settings/changeSetting', {
+          key: 'isRightPanelShow',
+          value: val
+        })
+      }
+    }
   },
   methods: {
     toggleSideBar() {
@@ -77,6 +90,9 @@ export default {
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    },
+    clickTest() {
+      console.log("aaaaaa")
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container main_content">
     <div class="filter-container">
       <el-input
         v-model="listQuery.title"
@@ -147,10 +147,10 @@
         </template>
         <template v-if="paper_upload_process">
           <el-form-item label="论文题目" prop="r_title">
-            <el-input v-model="temp.name"/>
+            <el-input v-model="temp.name" />
           </el-form-item>
           <el-form-item label="论文作者">
-            <el-input v-model="temp.author"/>
+            <el-input v-model="temp.author" />
           </el-form-item>
           <el-form-item label="论文会议" prop="r_conference">
             <el-select v-model="temp.conference" placeholder="选择会议">
@@ -162,7 +162,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="论文年份" prop="r_year">
-            <el-input v-model="temp.conference_year"/>
+            <el-input v-model="temp.conference_year" />
           </el-form-item>
         </template>
 
@@ -176,6 +176,7 @@
         </el-button>
       </div>
     </el-dialog>
+    <div style="width: 100%; height: 50px" />
   </div>
 </template>
 
@@ -184,6 +185,7 @@ import { fetchPv, createArticle, updateArticle } from '@/api/article'
 import { fetchMyPaperList, updatePaper, fetchConferenceListForPaperUpload, fetchConferenceIdByName } from '@/api/paper_manage'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
+import $ from 'jquery'
 // import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 export default {
@@ -217,10 +219,10 @@ export default {
       dialogPvVisible: false,
       pvData: [],
       rules: {
-        r_file: [{ required: true, message: '请上传文件' }],
-        r_conference: [{ required: true, message: '所属会议一定要填' }],
-        r_title: [{ required: true, message: '论文标题一定要填' }],
-        r_year: [{ required: true, message: '论文年份一定要填', trigger: 'blur' }]
+        // r_file: [{ required: true, message: '请上传文件' }],
+        // r_conference: [{ required: true, message: '所属会议一定要填' }],
+        // r_title: [{ required: true, message: '论文标题一定要填' }],
+        // r_year: [{ required: true, message: '论文年份一定要填', trigger: 'blur' }]
       },
       downloadLoading: false,
       isOpenInside: true,
@@ -234,6 +236,18 @@ export default {
   },
   created() {
     this.getList()
+  },
+  mounted() {
+    // 实现APP的高度占满全屏
+    $('.main_content').height($(window).height() - 100)
+    $('.app-main').height($(window).height() - 85)
+    window.onresize = () => {
+      return (() => {
+        $('.main_content').height($(window).height() - 100)
+        $('.app-main').height($(window).height() - 85)
+      })()
+    }
+    window.addEventListener('scroll', this.scrollHandle, true) // 监听 监听元素是否进入/移出可视区域
   },
   methods: {
     getList() {
@@ -405,3 +419,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.main_content {
+  overflow-y: scroll;
+}
+</style>

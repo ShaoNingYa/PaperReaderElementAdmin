@@ -1,7 +1,7 @@
 import variables from '@/styles/element-variables.scss'
 import defaultSettings from '@/settings'
 
-const { showSettings, tagsView, fixedHeader, sidebarLogo, isOpenInside } = defaultSettings
+const { showSettings, tagsView, fixedHeader, sidebarLogo, isOpenInside, isRightPanelShow } = defaultSettings
 
 const state = {
   theme: variables.theme,
@@ -9,7 +9,8 @@ const state = {
   tagsView: tagsView,
   fixedHeader: fixedHeader,
   sidebarLogo: sidebarLogo,
-  isOpenInside: isOpenInside
+  isOpenInside: isOpenInside,
+  isRightPanelShow: isRightPanelShow
 }
 
 const mutations = {

@@ -37,5 +37,6 @@ module.exports = {
    * @type {boolean} true | false
    * @description Whether open the paper inside (or use browser)
    */
-  isOpenInside: true
+  isOpenInside: true,
+  isRightPanelShow: true
 }

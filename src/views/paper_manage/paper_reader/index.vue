@@ -45,8 +45,7 @@ export default {
         }
       })
     })
-    if(this.sidebar.opened){this.toggleSideBar()}
-
+    if (this.sidebar.opened) { this.toggleSideBar() }
   },
   methods: {
     toggleSideBar() {

@@ -7,8 +7,14 @@
         ref="moveBtn"
         class="handle-button"
         :style="{'bottom':50+'px','background-color':theme}"
-        style="top: 80px"
         @click="show=!show"
+        @mousedown="down"
+        @touchstart="down"
+        @mousemove="move"
+        @touchmove="move"
+        @mouseup="end"
+        @touchend="end"
+        @touchcancel="end"
       >
         <i :class="show?'el-icon-close':'el-icon-setting'" />
       </div>
@@ -37,7 +43,20 @@ export default {
   },
   data() {
     return {
-      show: false
+      show: false,
+      flags: false,
+      position: {
+        x: 0,
+        y: 0
+      },
+      nx: '',
+      ny: '',
+      dx: '',
+      dy: '',
+      xPum: '',
+      yPum: '',
+      isShow: false,
+      moveBtn: {}
     }
   },
   computed: {
@@ -80,6 +99,63 @@ export default {
       const elx = this.$refs.rightPanel
       const body = document.querySelector('body')
       body.insertBefore(elx, body.firstChild)
+    },
+    down() {
+      console.log("done")
+      this.flags = true
+      var touch
+      if (event.touches) {
+        touch = event.touches[0]
+      } else {
+        touch = event
+      }
+      this.position.x = touch.clientX
+      this.position.y = touch.clientY
+      this.dx = this.moveBtn.offsetLeft
+      this.dy = this.moveBtn.offsetTop
+    },
+    move() {
+      console.log("move")
+      if (this.flags) {
+        var touch
+        if (event.touches) {
+          touch = event.touches[0]
+        } else {
+          touch = event
+        }
+        this.nx = touch.clientX - this.position.x
+        this.ny = touch.clientY - this.position.y
+        this.xPum = this.dx + this.nx
+        this.yPum = this.dy + this.ny
+        var clientWidth = document.documentElement.clientWidth
+        var clientHeight = document.documentElement.clientHeight
+        if (this.xPum > 0 && this.xPum < (clientWidth - this.moveBtn.offsetWidth)) {
+          this.moveBtn.style.left = this.xPum + 'px'
+        }
+        if (this.yPum > 0 && this.yPum < (clientHeight - this.moveBtn.offsetHeight)) {
+          this.moveBtn.style.top = this.yPum + 'px'
+        }
+
+        // 阻止页面的滑动默认事件
+        document.addEventListener('touchmove', this.handler, {
+          passive: false
+        })
+      }
+    },
+    // 鼠标释放时候的函数
+    end() {
+      console.log("up")
+      this.flags = false
+      document.addEventListener('touchmove', this.handler, {
+        passive: false
+      })
+    },
+    handler(e) {
+      if (this.flags) {
+        event.preventDefault()
+      } else {
+        return true
+      }
     }
   }
 }

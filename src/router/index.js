@@ -49,7 +49,7 @@ export const constantRoutes = [
   },
   {
     path: '/',
-    // redirect: '/paper', // TODO
+    redirect: '/study/todo_list', // TODO
     component: () => import('@/views/welcome'),
     hidden: true
   },
@@ -104,36 +104,36 @@ export const constantRoutes = [
     meta: { title: '学习管理', icon: 'el-icon-finished', breadcrumb: false },
     children: [
       {
-        path: '',
-        // path: 'todo_list',
+        // path: '',
+        path: 'todo_list',
         name: 'ToDo List',
         component: () => import('@/views/study_manage/todo_list/index'),
         meta: { title: '今日待办', icon: 'el-icon-finished' }
       },
-      {
-        path: 'study_history',
-        name: 'History',
-        component: () => import('@/views/study_manage/history/index'),
-        meta: { title: '学习历史', icon: 'el-icon-data-line' }
-      },
-      {
-        path: 'study_path',
-        name: 'History',
-        component: () => import('@/views/study_manage/study_path/index'),
-        meta: { title: '我的学习路线', icon: 'el-icon-notebook-1' }
-      },
-      {
-        path: 'study_path_all',
-        name: 'History',
-        component: () => import('@/views/study_manage/study_path_all/index'),
-        meta: { title: '全部学习路线', icon: 'el-icon-notebook-2' }
-      },
-      {
-        path: 'study_resources',
-        name: 'History',
-        component: () => import('@/views/study_manage/study_resource/index'),
-        meta: { title: '全部学习资源', icon: 'el-icon-collection-tag' }
-      },
+      // {
+      //   path: 'study_history',
+      //   name: 'History',
+      //   component: () => import('@/views/study_manage/history/index'),
+      //   meta: { title: '学习历史', icon: 'el-icon-data-line' }
+      // },
+      // {
+      //   path: 'study_path',
+      //   name: 'History',
+      //   component: () => import('@/views/study_manage/study_path/index'),
+      //   meta: { title: '我的学习路线', icon: 'el-icon-notebook-1' }
+      // },
+      // {
+      //   path: 'study_path_all',
+      //   name: 'History',
+      //   component: () => import('@/views/study_manage/study_path_all/index'),
+      //   meta: { title: '全部学习路线', icon: 'el-icon-notebook-2' }
+      // },
+      // {
+      //   path: 'study_resources',
+      //   name: 'History',
+      //   component: () => import('@/views/study_manage/study_resource/index'),
+      //   meta: { title: '全部学习资源', icon: 'el-icon-collection-tag' }
+      // },
       {
         path: 'work_find',
         name: 'WorkFind',
@@ -168,13 +168,13 @@ export const constantRoutes = [
         hidden: true,
         meta: { title: '全部论文', icon: 'el-icon-files' }
       },
-      {
-        path: 'paper_show',
-        name: '论文可视化',
-        component: () => import('@/views/paper_manage/paper_show/index'),
-        // hidden: true,
-        meta: { title: '论文可视化', icon: 'el-icon-data-analysis' }
-      },
+      // {
+      //   path: 'paper_show',
+      //   name: '论文可视化',
+      //   component: () => import('@/views/paper_manage/paper_show/index'),
+      //   // hidden: true,
+      //   meta: { title: '论文可视化', icon: 'el-icon-data-analysis' }
+      // },
       {
         path: 'paper_reader/:path/:page/:id',
         // name: '论文阅读器',

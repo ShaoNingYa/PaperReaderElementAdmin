@@ -30,6 +30,8 @@ npm run build:prod
     frameborder='1'>
 </iframe>
 ```
+- 增加按钮粒子效果 https://gitee.com/pxp/vue-particle-effect?_from=gitee_search
+- 增加聊天室功能 https://gitee.com/june000/lemon-im?_from=gitee_search
 # 问题
 
 - 部署时，需要更改的地方：
