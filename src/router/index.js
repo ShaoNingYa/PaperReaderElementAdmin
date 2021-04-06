@@ -59,6 +59,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/setting',
+    component: () => import('@/views/setting'),
+    hidden: false
+  },
+  {
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',

@@ -247,7 +247,6 @@ export default {
         $('.app-main').height($(window).height() - 85)
       })()
     }
-    window.addEventListener('scroll', this.scrollHandle, true) // 监听 监听元素是否进入/移出可视区域
   },
   methods: {
     getList() {

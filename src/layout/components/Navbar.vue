@@ -6,7 +6,7 @@
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
-<!--        <button v-model="paperOpenType">{{ isRightPanelShow }}</button>-->
+        <!--        <button v-model="paperOpenType">{{ isRightPanelShow }}</button>-->
         <search id="header-search" class="right-menu-item" />
 
         <error-log class="errLog-container right-menu-item hover-effect" />
@@ -29,13 +29,13 @@
             <el-dropdown-item>个人信息</el-dropdown-item>
           </router-link>
           <router-link to="/">
-            <el-dropdown-item>返回欢迎页</el-dropdown-item>
+            <el-dropdown-item>欢迎页</el-dropdown-item>
           </router-link>
+          <span @click="drawer=!drawer">
+            <el-dropdown-item>设置</el-dropdown-item>
+          </span>
           <a target="_blank" href="https://github.com">
-            <el-dropdown-item>我的 Github</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
+            <el-dropdown-item>Github</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">退出</span>
@@ -43,27 +43,42 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+    <el-drawer
+      title="设置"
+      :visible.sync="drawer"
+      size="50%"
+      :modal="false"
+      :show-close="false"
+      :with-header="false"
+    >
+      <settings />
+    </el-drawer>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import ErrorLog from '@/components/ErrorLog'
 import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import Search from '@/components/HeaderSearch'
-import RightPanel from '@/components/RightPanel'
-import Settings from './Settings'
+import Settings from '@/layout/components/Settings'
 export default {
   components: {
+    Settings,
     Breadcrumb,
     Hamburger,
     ErrorLog,
     Screenfull,
     SizeSelect,
     Search
+  },
+  data() {
+    return {
+      drawer: false
+    }
   },
   computed: {
     ...mapGetters([
@@ -90,9 +105,6 @@ export default {
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
-    },
-    clickTest() {
-      console.log("aaaaaa")
     }
   }
 }

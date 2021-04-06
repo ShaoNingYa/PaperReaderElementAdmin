@@ -1,12 +1,13 @@
 <template>
   <div class="main_content">
-    <TimeClock />
-    <todo-list :is_edit="true" :todos="defaultList" @dataChange="dataChange" />
-    <ToDoTemplate style="margin-top: 50px; width: 95%" @dataChange="dataChangeFrom" @dataAddOne="dataChangeFromOne" />
-    <todo-history style="margin-top: 50px; width: 95%" @dataChange="dataChangeFrom" @dataAddOne="dataChangeFromOne" />
-    <div class="placeholder_block" />
+    <TimeClock/>
+    <todo-list v-loading="loading_today" element-loading-text="正在加载今日待办..." :is_edit="true" :todos="defaultList"
+               @dataChange="dataChange"/>
+    <ToDoTemplate style="margin-top: 50px; width: 95%" @dataChange="dataChangeFrom" @dataAddOne="dataChangeFromOne"/>
+    <todo-history style="margin-top: 50px; width: 95%" @dataChange="dataChangeFrom" @dataAddOne="dataChangeFromOne"/>
+    <div class="placeholder_block"/>
     <transition name="el-fade-in-linear">
-      <div v-if="is_sub_todo_show" class="sub_todo_show">
+      <div v-if="is_sub_todo_show" v-loading="loading_today" class="sub_todo_show">
         <div v-for="todo_one in defaultList" class="todo_one">
           <el-checkbox v-model="todo_one.done" label="禁用">{{ todo_one.text }}</el-checkbox>
           <!--          <span style="padding-left: 6px">{{ todo_one.text }}</span>-->
@@ -36,7 +37,8 @@ export default {
     return {
       defaultList: [{ text: 'loading...', done: false }],
       dataChangeFlag: true,
-      is_sub_todo_show: false
+      is_sub_todo_show: false,
+      loading_today: true
     }
   },
   watch: {},
@@ -53,12 +55,16 @@ export default {
     }
     window.addEventListener('scroll', this.scrollHandle, true) // 监听 监听元素是否进入/移出可视区域
   },
+  destroyed() {
+    window.removeEventListener('scroll', this.scrollHandle, true)
+  },
   methods: {
     get_todo_list_today() {
       todolist_get_today({ token: this.$store.getters.token }).then(response => {
         // console.log(response.date, response.data)
         this.defaultList = response.data
         this.dataChangeFlag = true
+        this.loading_today = false
       })
     },
     update_todo_list_today() { // 把有变化的数据上传到数据库并重新拉取

@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <el-timeline>
+    <el-timeline v-loading="loading_template" element-loading-text="正在加载待办模板...">
       <el-timeline-item
         v-for="his_one in defaultTemplateList"
         color="#0bbd87"
@@ -75,6 +75,7 @@ export default {
     return {
       defaultTemplateList: [{ text: 'loading...', done: false }],
       dialogVisibleForEdit: false,
+      loading_template: true,
       dataWillEdit: [],
       templateName: '未命名模板'
     }
@@ -96,6 +97,7 @@ export default {
       todolist_get_template({ token: this.$store.getters.token }).then(response => {
         // console.log(response.data)
         this.defaultTemplateList = response.data
+        this.loading_template = false
       })
     },
     push_cur_data(data_one) {

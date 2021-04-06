@@ -30,7 +30,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import ThemePicker from '@/components/ThemePicker'
 
