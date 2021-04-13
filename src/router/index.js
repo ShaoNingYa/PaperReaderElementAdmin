@@ -196,6 +196,21 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/activity',
+    component: Layout,
+    name: 'Activity',
+    // hidden: true,
+    meta: { title: '活动管理', icon: 'el-icon-phone-outline', breadcrumb: false },
+    children: [
+      {
+        path: 'badminton_manage',
+        name: 'Badminton Manage',
+        component: () => import('@/views/activities_manage/badminton_manage/index'),
+        meta: { title: '羽毛球预定管理', icon: 'el-icon-phone-outline' }
+      }
+    ]
+  },
+  {
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',
@@ -255,16 +270,16 @@ export const constantRoutes = [
     ]
   },
 
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://github.com/',
-        meta: { title: 'GitHub', icon: 'link' }
-      }
-    ]
-  },
+  // {
+  //   path: 'external-link',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'https://github.com/',
+  //       meta: { title: 'GitHub', icon: 'link' }
+  //     }
+  //   ]
+  // },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

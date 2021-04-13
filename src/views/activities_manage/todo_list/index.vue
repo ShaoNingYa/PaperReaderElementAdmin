@@ -1,16 +1,11 @@
 <template>
   <div class="main_content">
-    <TimeClock />
-    <todo-list
-      v-loading="loading_today"
-      element-loading-text="正在加载今日待办..."
-      :is_edit="true"
-      :todos="defaultList"
-      @dataChange="dataChange"
-    />
-    <ToDoTemplate style="margin-top: 50px; width: 95%" @dataChange="dataChangeFrom" @dataAddOne="dataChangeFromOne" />
-    <todo-history style="margin-top: 50px; width: 95%" @dataChange="dataChangeFrom" @dataAddOne="dataChangeFromOne" />
-    <div class="placeholder_block" />
+    <TimeClock/>
+    <todo-list v-loading="loading_today" element-loading-text="正在加载今日待办..." :is_edit="true" :todos="defaultList"
+               @dataChange="dataChange"/>
+    <ToDoTemplate style="margin-top: 50px; width: 95%" @dataChange="dataChangeFrom" @dataAddOne="dataChangeFromOne"/>
+    <todo-history style="margin-top: 50px; width: 95%" @dataChange="dataChangeFrom" @dataAddOne="dataChangeFromOne"/>
+    <div class="placeholder_block"/>
     <transition name="el-fade-in-linear">
       <div v-if="is_sub_todo_show" v-loading="loading_today" class="sub_todo_show">
         <div v-for="todo_one in defaultList" class="todo_one">
